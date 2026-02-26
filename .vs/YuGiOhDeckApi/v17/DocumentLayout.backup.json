@@ -1,0 +1,189 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\rgt21\\source\\repos\\.NET\\YuGiOhDeckApi\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F10EF4DF-C3EC-45A2-8EB6-4931F01FA94C}|YuGiOhDeckApi.csproj|c:\\users\\rgt21\\source\\repos\\.net\\yugiohdeckapi\\controllers\\decklistmongodbcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F10EF4DF-C3EC-45A2-8EB6-4931F01FA94C}|YuGiOhDeckApi.csproj|solutionrelative:controllers\\decklistmongodbcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F10EF4DF-C3EC-45A2-8EB6-4931F01FA94C}|YuGiOhDeckApi.csproj|c:\\users\\rgt21\\source\\repos\\.net\\yugiohdeckapi\\data\\mongodbservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F10EF4DF-C3EC-45A2-8EB6-4931F01FA94C}|YuGiOhDeckApi.csproj|solutionrelative:data\\mongodbservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F10EF4DF-C3EC-45A2-8EB6-4931F01FA94C}|YuGiOhDeckApi.csproj|c:\\users\\rgt21\\source\\repos\\.net\\yugiohdeckapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F10EF4DF-C3EC-45A2-8EB6-4931F01FA94C}|YuGiOhDeckApi.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F10EF4DF-C3EC-45A2-8EB6-4931F01FA94C}|YuGiOhDeckApi.csproj|c:\\users\\rgt21\\source\\repos\\.net\\yugiohdeckapi\\controllers\\decklistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F10EF4DF-C3EC-45A2-8EB6-4931F01FA94C}|YuGiOhDeckApi.csproj|solutionrelative:controllers\\decklistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F10EF4DF-C3EC-45A2-8EB6-4931F01FA94C}|YuGiOhDeckApi.csproj|c:\\users\\rgt21\\source\\repos\\.net\\yugiohdeckapi\\repositories\\idecklistrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F10EF4DF-C3EC-45A2-8EB6-4931F01FA94C}|YuGiOhDeckApi.csproj|solutionrelative:repositories\\idecklistrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F10EF4DF-C3EC-45A2-8EB6-4931F01FA94C}|YuGiOhDeckApi.csproj|c:\\users\\rgt21\\source\\repos\\.net\\yugiohdeckapi\\repositories\\decklistrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F10EF4DF-C3EC-45A2-8EB6-4931F01FA94C}|YuGiOhDeckApi.csproj|solutionrelative:repositories\\decklistrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F10EF4DF-C3EC-45A2-8EB6-4931F01FA94C}|YuGiOhDeckApi.csproj|c:\\users\\rgt21\\source\\repos\\.net\\yugiohdeckapi\\models\\mongodbsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F10EF4DF-C3EC-45A2-8EB6-4931F01FA94C}|YuGiOhDeckApi.csproj|solutionrelative:models\\mongodbsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F10EF4DF-C3EC-45A2-8EB6-4931F01FA94C}|YuGiOhDeckApi.csproj|c:\\users\\rgt21\\source\\repos\\.net\\yugiohdeckapi\\models\\decklist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F10EF4DF-C3EC-45A2-8EB6-4931F01FA94C}|YuGiOhDeckApi.csproj|solutionrelative:models\\decklist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F10EF4DF-C3EC-45A2-8EB6-4931F01FA94C}|YuGiOhDeckApi.csproj|c:\\users\\rgt21\\source\\repos\\.net\\yugiohdeckapi\\models\\card.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F10EF4DF-C3EC-45A2-8EB6-4931F01FA94C}|YuGiOhDeckApi.csproj|solutionrelative:models\\card.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F10EF4DF-C3EC-45A2-8EB6-4931F01FA94C}|YuGiOhDeckApi.csproj|c:\\users\\rgt21\\source\\repos\\.net\\yugiohdeckapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{F10EF4DF-C3EC-45A2-8EB6-4931F01FA94C}|YuGiOhDeckApi.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IDeckListRepository.cs",
+              "DocumentMoniker": "C:\\Users\\rgt21\\source\\repos\\.NET\\YuGiOhDeckApi\\Repositories\\IDeckListRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\IDeckListRepository.cs",
+              "ToolTip": "C:\\Users\\rgt21\\source\\repos\\.NET\\YuGiOhDeckApi\\Repositories\\IDeckListRepository.cs",
+              "RelativeToolTip": "Repositories\\IDeckListRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-25T14:54:46.865Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DeckListMongoDbController.cs",
+              "DocumentMoniker": "C:\\Users\\rgt21\\source\\repos\\.NET\\YuGiOhDeckApi\\Controllers\\DeckListMongoDbController.cs",
+              "RelativeDocumentMoniker": "Controllers\\DeckListMongoDbController.cs",
+              "ToolTip": "C:\\Users\\rgt21\\source\\repos\\.NET\\YuGiOhDeckApi\\Controllers\\DeckListMongoDbController.cs",
+              "RelativeToolTip": "Controllers\\DeckListMongoDbController.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAtwDUAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-23T21:12:34.556Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MongoDbService.cs",
+              "DocumentMoniker": "C:\\Users\\rgt21\\source\\repos\\.NET\\YuGiOhDeckApi\\Data\\MongoDbService.cs",
+              "RelativeDocumentMoniker": "Data\\MongoDbService.cs",
+              "ToolTip": "C:\\Users\\rgt21\\source\\repos\\.NET\\YuGiOhDeckApi\\Data\\MongoDbService.cs",
+              "RelativeToolTip": "Data\\MongoDbService.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAuwCkAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-23T19:52:10.803Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "DeckList.cs",
+              "DocumentMoniker": "C:\\Users\\rgt21\\source\\repos\\.NET\\YuGiOhDeckApi\\Models\\DeckList.cs",
+              "RelativeDocumentMoniker": "Models\\DeckList.cs",
+              "ToolTip": "C:\\Users\\rgt21\\source\\repos\\.NET\\YuGiOhDeckApi\\Models\\DeckList.cs",
+              "RelativeToolTip": "Models\\DeckList.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABMAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-23T12:53:30.801Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DeckListController.cs",
+              "DocumentMoniker": "C:\\Users\\rgt21\\source\\repos\\.NET\\YuGiOhDeckApi\\Controllers\\DeckListController.cs",
+              "RelativeDocumentMoniker": "Controllers\\DeckListController.cs",
+              "ToolTip": "C:\\Users\\rgt21\\source\\repos\\.NET\\YuGiOhDeckApi\\Controllers\\DeckListController.cs",
+              "RelativeToolTip": "Controllers\\DeckListController.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAlwDMAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-23T20:08:28.542Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Card.cs",
+              "DocumentMoniker": "C:\\Users\\rgt21\\source\\repos\\.NET\\YuGiOhDeckApi\\Models\\Card.cs",
+              "RelativeDocumentMoniker": "Models\\Card.cs",
+              "ToolTip": "C:\\Users\\rgt21\\source\\repos\\.NET\\YuGiOhDeckApi\\Models\\Card.cs",
+              "RelativeToolTip": "Models\\Card.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-23T12:57:05.23Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "MongoDBSettings.cs",
+              "DocumentMoniker": "C:\\Users\\rgt21\\source\\repos\\.NET\\YuGiOhDeckApi\\Models\\MongoDBSettings.cs",
+              "RelativeDocumentMoniker": "Models\\MongoDBSettings.cs",
+              "ToolTip": "C:\\Users\\rgt21\\source\\repos\\.NET\\YuGiOhDeckApi\\Models\\MongoDBSettings.cs",
+              "RelativeToolTip": "Models\\MongoDBSettings.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-25T14:36:05.449Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\rgt21\\source\\repos\\.NET\\YuGiOhDeckApi\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\rgt21\\source\\repos\\.NET\\YuGiOhDeckApi\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-02-23T19:51:05.412Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\rgt21\\source\\repos\\.NET\\YuGiOhDeckApi\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\rgt21\\source\\repos\\.NET\\YuGiOhDeckApi\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAADwvzoAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-23T13:15:43.693Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "DeckListRepository.cs",
+              "DocumentMoniker": "C:\\Users\\rgt21\\source\\repos\\.NET\\YuGiOhDeckApi\\Repositories\\DeckListRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\DeckListRepository.cs",
+              "ToolTip": "C:\\Users\\rgt21\\source\\repos\\.NET\\YuGiOhDeckApi\\Repositories\\DeckListRepository.cs",
+              "RelativeToolTip": "Repositories\\DeckListRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-25T14:54:36.871Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
