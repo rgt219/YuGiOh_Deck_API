@@ -28,7 +28,6 @@ namespace YuGiOhDeckApi.Controllers
         public async Task<IEnumerable<DeckList>> Get()
         {
             return await _mongoDbService.GetAsync();
-            //return await _deckListCollection.Find(FilterDefinition<DeckList>.Empty).ToListAsync();
         }
 
         [HttpGet("{id}")]
@@ -38,19 +37,15 @@ namespace YuGiOhDeckApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post(DeckList deckList)
+        public async Task<ActionResult> Post([FromBody]DeckList deckList)
         {
             await _mongoDbService.CreateAsync(deckList);
             return CreatedAtAction(nameof(Get), new { id = deckList.Id }, deckList);
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> Update(DeckList deckList, int id)
+        public async Task<ActionResult> Update([FromBody]DeckList deckList, int id)
         {
-            //var filter = Builders<DeckList>.Filter.Eq(x => x.Id, deckList.Id);
-
-            //await _deckListCollection.ReplaceOneAsync(filter, deckList);
-            //return Ok();
             await _mongoDbService.UpdateByIdAsync(deckList, id);
             return NoContent();
         }
@@ -58,9 +53,6 @@ namespace YuGiOhDeckApi.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteById(int id)
         {
-            //var filter = Builders<DeckList>.Filter.Eq(x => x.Id, id);
-            //await _deckListCollection.DeleteOneAsync(filter);
-            //return Ok();
             await _mongoDbService.DeleteByIdAsync(id);
             return NoContent();    
         }
@@ -68,9 +60,6 @@ namespace YuGiOhDeckApi.Controllers
         [HttpDelete("{title}")]
         public async Task<ActionResult> DeleteByTitle(string title)
         {
-            //var filter = Builders<DeckList>.Filter.Eq(x => x.Id, id);
-            //await _deckListCollection.DeleteOneAsync(filter);
-            //return Ok();
             await _mongoDbService.DeleteByTitleAsync(title);
             return NoContent();
         }

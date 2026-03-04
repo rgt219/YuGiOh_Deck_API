@@ -326,15 +326,27 @@
               "type": "integer",
               "format": "int32"
             }
-          },
-          {
-            "name": "title",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeckList"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeckList"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeckList"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -353,6 +365,28 @@
             "schema": {
               "type": "integer",
               "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/mongodb/DeckListMongoDb/{title}": {
+      "delete": {
+        "tags": [
+          "DeckListMongoDb"
+        ],
+        "parameters": [
+          {
+            "name": "title",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -388,11 +422,11 @@
       "Card": {
         "type": "object",
         "properties": {
-          "cardId": {
+          "id": {
             "type": "string",
             "nullable": true
           },
-          "cardName": {
+          "name": {
             "type": "string",
             "nullable": true
           },
@@ -400,33 +434,37 @@
             "type": "string",
             "nullable": true
           },
-          "race": {
+          "frameType": {
             "type": "string",
             "nullable": true
           },
-          "effect": {
+          "desc": {
             "type": "string",
             "nullable": true
           },
-          "attackPoints": {
+          "atk": {
             "type": "integer",
             "format": "int32"
           },
-          "defensePoints": {
+          "def": {
             "type": "integer",
             "format": "int32"
-          },
-          "attribute": {
-            "type": "string",
-            "nullable": true
           },
           "level": {
             "type": "integer",
             "format": "int32"
           },
-          "cardCount": {
-            "type": "integer",
-            "format": "int32"
+          "race": {
+            "type": "string",
+            "nullable": true
+          },
+          "attribute": {
+            "type": "string",
+            "nullable": true
+          },
+          "image": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

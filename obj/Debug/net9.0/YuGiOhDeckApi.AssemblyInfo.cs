@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("YuGiOhDeckApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+20c1c15033b072a45156b4d1d56f85142744829b")]
 [assembly: System.Reflection.AssemblyProductAttribute("YuGiOhDeckApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("YuGiOhDeckApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
