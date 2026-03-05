@@ -9,25 +9,48 @@ namespace YuGiOhDeckApi.Controllers;
 [Route("api/[controller]")]
 public class UsersController : ControllerBase
 {
-    private readonly UserService _userService;
+    private readonly UserRegistrationService _userService;
 
-    public UsersController(UserService userService)
+    public UsersController(UserRegistrationService userService)
     {
         _userService = userService;
     }
 
     [HttpPost("register")]
-    public async Task<IActionResult> Register(User registrationUser)
+    public async Task<IActionResult> Register([FromBody] UserRegistration user)
     {
-        // Basic validation
-        if (string.IsNullOrEmpty(registrationUser.Email) || string.IsNullOrEmpty(registrationUser.PasswordHash))
+        // 1. Validate the request
+        if (user == null || string.IsNullOrEmpty(user.Email))
+            return BadRequest(new { message = "INVALID_TERMINAL_DATA" });
+
+        // 2. Check if the user already exists
+        var existingUser = await _userService.GetByEmailAsync(user.Email);
+        if (existingUser != null)
+            return BadRequest(new { message = "IDENTIFIER_ALREADY_EXISTS" });
+
+        // 3. Save to MongoDB
+        await _userService.CreateAsync(user);
+
+        return Ok(new { message = "DATABASE_UPLINK_SUCCESSFUL" });
+    }
+
+    [HttpPost("login")]
+    public async Task<IActionResult> Login([FromBody] UserRegistration user)
+    {
+        var registeredUser = await _userService.GetByEmailAsync(user.Email);
+
+        if(registeredUser == null || registeredUser.Password != user.Password)
         {
-            return BadRequest("Email and password are required.");
+            return Unauthorized(new { message = "INVALID_ACCESS_CODE" });
         }
 
-        // In a real app, check for existing users first
-
-        await _userService.CreateAsync(registrationUser);
-        return Ok(registrationUser);
+        return Ok(new
+        {
+            firstName = registeredUser.FirstName,
+            lastName = registeredUser.LastName,
+            email = registeredUser.Email,
+            userName = registeredUser.UserName,
+            id = registeredUser.Id
+        });
     }
 }

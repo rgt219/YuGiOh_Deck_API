@@ -14,7 +14,9 @@ namespace YuGiOhDeckApi
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.Configure<MongoDBSettings>(builder.Configuration.GetSection("MongoDB"));
+            builder.Services.Configure<MongoDBUserSettings>(builder.Configuration.GetSection("MongoDBUsers"));
             builder.Services.AddSingleton<MongoDbService>();
+            builder.Services.AddSingleton<UserRegistrationService>();
 
             builder.Services.AddDbContext<AppDbContext>(
                   options => options.UseInMemoryDatabase("DeckListDb")
@@ -32,6 +34,7 @@ namespace YuGiOhDeckApi
 
             //Adding service (repository) to our Dependency Injection for the lifetime of a single HTTP instance
             builder.Services.AddScoped<IDeckListRepository, DeckListRepository>();
+            builder.Services.AddScoped<UserRegistrationService>();
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

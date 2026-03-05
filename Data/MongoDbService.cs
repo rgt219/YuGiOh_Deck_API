@@ -59,5 +59,10 @@ namespace YuGiOhDeckApi.Data
             return;
         }
 
+        public async Task<List<DeckList>> GetByUserIdAsync(int userId)
+        {
+            return await _deckListCollection.Find(x => x.UserId == userId).ToListAsync();
+        }
+
     }
 }

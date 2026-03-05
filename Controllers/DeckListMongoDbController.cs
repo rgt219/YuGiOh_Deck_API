@@ -63,5 +63,19 @@ namespace YuGiOhDeckApi.Controllers
             await _mongoDbService.DeleteByTitleAsync(title);
             return NoContent();
         }
+
+        [HttpGet("user/{userId}")]
+        public async Task<ActionResult<List<DeckList>>> GetByUserId(int userId)
+        {
+            // Use the service! It's the one that has the database connection.
+            var decks = await _mongoDbService.GetByUserIdAsync(userId);
+
+            if (decks == null)
+            {
+                return Ok(new List<DeckList>()); // Return empty list instead of null
+            }
+
+            return Ok(decks);
+        }
     }
 }

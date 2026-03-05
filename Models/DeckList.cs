@@ -29,6 +29,9 @@ namespace YuGiOhDeckApi.Models
 
         [BsonElement("title")]
         public string Title { get; set; }
+
+        [BsonElement("userId")]
+        public int UserId { get; set; }
     }
 
     public enum DeckSection
