@@ -14,6 +14,7 @@ namespace YuGiOhDeckApi.Data
         public MongoDbService(IOptions<MongoDBSettings> mongoDBSettings)
         {
             MongoClient client = new MongoClient(mongoDBSettings.Value.ConnectionURI);
+            Console.WriteLine("CONNECTION URI: " + mongoDBSettings.Value.ConnectionURI);
             IMongoDatabase database = client.GetDatabase(mongoDBSettings.Value.DatabaseName);
             _deckListCollection = database.GetCollection<DeckList>(mongoDBSettings.Value.CollectionName);
         }
@@ -62,6 +63,18 @@ namespace YuGiOhDeckApi.Data
         public async Task<List<DeckList>> GetByUserIdAsync(int userId)
         {
             return await _deckListCollection.Find(x => x.UserId == userId).ToListAsync();
+        }
+
+        public async Task<bool> DeleteUserDeckAsync(int deckId, int userId)
+        {
+            // This filter is strict. Both must match exactly.
+            var filter = Builders<DeckList>.Filter.And(
+                Builders<DeckList>.Filter.Eq(x => x.Id, deckId),
+                Builders<DeckList>.Filter.Eq(x => x.UserId, userId)
+            );
+
+            var result = await _deckListCollection.DeleteOneAsync(filter);
+            return result.DeletedCount > 0;
         }
 
     }

@@ -77,5 +77,18 @@ namespace YuGiOhDeckApi.Controllers
 
             return Ok(decks);
         }
+
+        [HttpDelete("{deckId}/user/{userId}")] // Change {id} to {deckId}
+        public async Task<ActionResult> DeleteById(int deckId, int userId) // Use deckId here
+        {
+            var success = await _mongoDbService.DeleteUserDeckAsync(deckId, userId);
+
+            if (!success)
+            {
+                return NotFound(new { message = "DECK_NOT_FOUND_OR_OWNER_MISMATCH" });
+            }
+
+            return NoContent();
+        }
     }
 }

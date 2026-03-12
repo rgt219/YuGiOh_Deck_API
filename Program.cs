@@ -26,9 +26,10 @@ namespace YuGiOhDeckApi
             {
                 options.AddPolicy("MyCors", builder =>
                 {
-                    builder.AllowAnyOrigin()
+                    builder.WithOrigins("http://localhost:3000") // Explicit, no wildcard!
                     .AllowAnyMethod()
-                    .AllowAnyHeader();
+                    .AllowAnyHeader()
+                    .AllowCredentials();
                 });
             });
 
@@ -38,22 +39,27 @@ namespace YuGiOhDeckApi
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            
+
 
             var app = builder.Build();
+
+            app.UseRouting();
 
             Console.WriteLine("IS THE APP IN DEVELOPMENT?");
             Console.WriteLine(app.Environment.IsDevelopment());
 
-            if(app.Environment.IsDevelopment())
+            if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI( c =>
+                app.UseSwaggerUI(c =>
                 {
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "API V1");
                     c.RoutePrefix = string.Empty;
                 });
             }
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseCors("MyCors");
 
