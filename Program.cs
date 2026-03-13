@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using YuGiOhDeckApi.Data;
 using YuGiOhDeckApi.Models;
 using YuGiOhDeckApi.Repositories;
+using Microsoft.ApplicationInsights.AspNetCore;
 
 namespace YuGiOhDeckApi
 {
