@@ -68,9 +68,42 @@ jobs:
           docker build -t yugiohapidocker.azurecr.io/api:${{ github.sha }} .
           docker push yugiohapidocker.azurecr.io/api:${{ github.sha }}
 
-      - name: Update Azure Container App
+      # 1. This creates the new version but gives it 0% traffic
+      - name: Update Azure Container App (0% Traffic)
+        id: deploy_step
         uses: azure/container-apps-deploy-action@v1
         with:
           imageToDeploy: yugiohapidocker.azurecr.io/api:${{ github.sha }}
           containerAppName: api
           resourceGroup: ErreGeTe
+          targetPort: 8080
+          revisionMode: Multiple # This is the "Blue-Green" switch
+
+      # 2. This checks the "secret" URL of the new version
+      - name: Run Smoke Test
+        run: |
+          # Get the unique URL for the revision we just created
+          REVISION_URL=$(az containerapp revision show \
+            --name api \
+            --resource-group ErreGeTe \
+            --revision ${{ steps.deploy_step.outputs.revisionName }} \
+            --query properties.fqdn -o tsv)
+
+          echo "Testing new revision at: https://$REVISION_URL"
+
+          # Ping your API (using the endpoint that previously gave you the 500 error)
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "https://$REVISION_URL/api/mongodb/DeckListMongoDb/user/447572")
+
+          if [ "$STATUS" -ne 200 ]; then
+            echo "Smoke test failed with status $STATUS! Users are still safe on the old version."
+            exit 1
+          fi
+
+      # 3. Only if the test above passes, we move the users over
+      - name: Shift Traffic to 100%
+        if: success()
+        run: |
+          az containerapp ingress traffic set \
+            --name api \
+            --resource-group ErreGeTe \
+            --revision-weight ${{ steps.deploy_step.outputs.revisionName }}=100
