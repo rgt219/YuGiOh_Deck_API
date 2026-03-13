@@ -42,9 +42,7 @@ jobs:
         run: dotnet restore YuGiOh_Deck_API/YuGiOhDeckApi.sln --force
 
       - name: Run .NET Unit Tests
-        run: |
-          cd YuGiOh_Deck_API.Tests
-          dotnet test --verbosity normal
+        run: dotnet test YuGiOh_Deck_API/YuGiOhDeckApi.sln --verbosity normal
 
       # 4. Azure Deployment Steps (Now only runs if tests pass)
       - name: Log in to Azure
