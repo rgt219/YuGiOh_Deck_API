@@ -16,6 +16,9 @@ namespace YuGiOhDeckApi
             builder.Services.Configure<MongoDBUserSettings>(builder.Configuration.GetSection("MongoDBUsers"));
             builder.Services.AddSingleton<MongoDbService>();
             builder.Services.AddSingleton<UserRegistrationService>();
+            builder.Services.AddSingleton<IMongoDbService, MongoDbService>();
+
+            builder.Services.Configure<MongoDBSettings>(builder.Configuration.GetSection("MongoDBSettings"));
 
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseInMemoryDatabase("DeckListDb"));
