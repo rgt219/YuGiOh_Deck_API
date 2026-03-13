@@ -43,6 +43,7 @@ namespace YuGiOhDeckApi
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddApplicationInsightsTelemetry();
 
             // 2. BUILD THE APP
             var app = builder.Build();
