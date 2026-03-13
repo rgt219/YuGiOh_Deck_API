@@ -1,57 +1,50 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.InMemory;
 using YuGiOhDeckApi.Data;
 using YuGiOhDeckApi.Models;
 using YuGiOhDeckApi.Repositories;
 
-
 namespace YuGiOhDeckApi
 {
-    public class Program
+    public partial class Program
     {
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            // 1. SERVICES CONFIGURATION
             builder.Services.Configure<MongoDBSettings>(builder.Configuration.GetSection("MongoDB"));
             builder.Services.Configure<MongoDBUserSettings>(builder.Configuration.GetSection("MongoDBUsers"));
             builder.Services.AddSingleton<MongoDbService>();
             builder.Services.AddSingleton<UserRegistrationService>();
 
-            builder.Services.AddDbContext<AppDbContext>(
-                  options => options.UseInMemoryDatabase("DeckListDb")
-            );
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                options.UseInMemoryDatabase("DeckListDb"));
 
             builder.Services.AddCors(options =>
             {
-                options.AddPolicy("MyCors", builder =>
+                options.AddPolicy("MyCors", policy =>
                 {
-                    builder.WithOrigins("http://localhost:3000") // Explicit, no wildcard!
-                    .AllowAnyMethod()
-                    .AllowAnyHeader()
-                    .AllowCredentials();
+                    policy.WithOrigins("http://localhost:3000")
+                          .AllowAnyMethod()
+                          .AllowAnyHeader()
+                          .AllowCredentials();
                 });
             });
 
-            //Adding service (repository) to our Dependency Injection for the lifetime of a single HTTP instance
             builder.Services.AddScoped<IDeckListRepository, DeckListRepository>();
-            builder.Services.AddScoped<UserRegistrationService>();
             builder.Services.AddControllers()
                 .AddJsonOptions(options =>
                 {
                     options.JsonSerializerOptions.PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase;
                 });
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-
+            // 2. BUILD THE APP
             var app = builder.Build();
 
-            app.UseRouting();
-
-            Console.WriteLine("IS THE APP IN DEVELOPMENT?");
-            Console.WriteLine(app.Environment.IsDevelopment());
-
+            // 3. MIDDLEWARE PIPELINE
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -62,13 +55,12 @@ namespace YuGiOhDeckApi
                 });
             }
 
+            app.UseRouting();
+            app.UseCors("MyCors");
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseCors("MyCors");
-
             app.MapGet("/", () => "Hello World!");
-
             app.MapControllers();
 
             app.Run();

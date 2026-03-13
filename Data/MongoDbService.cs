@@ -8,16 +8,18 @@ using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using YuGiOhDeckApi.Models;
+using YuGiOhDeckApi.Repositories;
 
 namespace YuGiOhDeckApi.Data
 {
-    public class MongoDbService
+    public class MongoDbService : IMongoDbService
     {
         private readonly IMongoCollection<DeckList> _deckListCollection;
         private List<CardData> _masterCache = new();
 
         public MongoDbService(IOptions<MongoDBSettings> mongoDBSettings)
         {
+            
             MongoClient client = new MongoClient(mongoDBSettings.Value.ConnectionURI);
             IMongoDatabase database = client.GetDatabase(mongoDBSettings.Value.DatabaseName);
             _deckListCollection = database.GetCollection<DeckList>(mongoDBSettings.Value.CollectionName);
@@ -26,7 +28,7 @@ namespace YuGiOhDeckApi.Data
             _ = InitializeCardCache();
         }
 
-        private async Task InitializeCardCache()
+        public async Task InitializeCardCache()
         {
             try
             {

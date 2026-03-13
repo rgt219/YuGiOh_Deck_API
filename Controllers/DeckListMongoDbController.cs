@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using YuGiOhDeckApi.Data;
 using YuGiOhDeckApi.Models;
+using YuGiOhDeckApi.Repositories;
 
 namespace YuGiOhDeckApi.Controllers
 {
@@ -11,9 +12,11 @@ namespace YuGiOhDeckApi.Controllers
     [ApiController]
     public class DeckListMongoDbController : ControllerBase
     {
-        private readonly MongoDbService _mongoDbService;
+        // This is where that variable lives!
+        private readonly IMongoDbService _mongoDbService;
 
-        public DeckListMongoDbController(MongoDbService mongoDbService)
+        // Change 'MongoDbService' to 'IMongoDbService' here
+        public DeckListMongoDbController(IMongoDbService mongoDbService)
         {
             _mongoDbService = mongoDbService;
         }
