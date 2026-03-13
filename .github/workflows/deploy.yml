@@ -39,7 +39,7 @@ jobs:
 
       # 3. Restore and Test using the folder paths
       - name: Restore Dependencies
-        run: dotnet restore YuGiOh_Deck_API/YuGiOhDeckApi.sln
+        run: dotnet restore YuGiOh_Deck_API/YuGiOhDeckApi.sln --force
 
       - name: Run .NET Unit Tests
         run: |
