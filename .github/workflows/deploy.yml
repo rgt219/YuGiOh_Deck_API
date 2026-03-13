@@ -1,0 +1,61 @@
+name: Azure_Uplink_Deployment
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout the API Code into a specific folder
+      - name: Checkout API Code
+        uses: actions/checkout@v4
+        with:
+          path: YuGiOh_Deck_API
+
+      # 2. Checkout the Test Code into a parallel folder
+      - name: Checkout Test Code
+        uses: actions/checkout@v4
+        with:
+          repository: rgt219/YuGiOh_Deck_API_Tests # Replace with your actual Test repo name
+          path: YuGiOh_Deck_API.Tests
+          token: ${{ secrets.GH_PAT }} # See note below about PATs
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "9.0.x"
+
+      # 3. Restore and Test using the folder paths
+      - name: Restore Dependencies
+        run: dotnet restore YuGiOh_Deck_API/YuGiOhDeckApi.sln
+
+      - name: Run .NET Unit Tests
+        run: dotnet test YuGiOh_Deck_API.Tests/YuGiOhDeckApi.Tests.csproj --verbosity normal
+
+      # 4. Azure Deployment Steps (Now only runs if tests pass)
+      - name: Log in to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Log in to Azure Container Registry
+        run: az acr login --name YuGiOhAPIDocker
+
+      - name: Build and Push Backend Image
+        run: |
+          # Note: We 'cd' into the API folder so Docker finds the Dockerfile
+          cd YuGiOh_Deck_API
+          docker build -t yugiohapidocker.azurecr.io/api:${{ github.sha }} .
+          docker push yugiohapidocker.azurecr.io/api:${{ github.sha }}
+
+      - name: Update Azure Container App
+        uses: azure/container-apps-deploy-action@v1
+        with:
+          imageToDeploy: yugiohapidocker.azurecr.io/api:${{ github.sha }}
+          containerAppName: api
+          resourceGroup: ErreGeTe
