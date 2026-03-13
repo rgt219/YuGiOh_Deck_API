@@ -3,7 +3,6 @@ using YuGiOhDeckApi.Data;
 using YuGiOhDeckApi.Models;
 using YuGiOhDeckApi.Repositories;
 using Microsoft.ApplicationInsights.AspNetCore;
-using Microsoft.Extensions.DependencyInjection;
 //Comment for pushing
 
 namespace YuGiOhDeckApi
