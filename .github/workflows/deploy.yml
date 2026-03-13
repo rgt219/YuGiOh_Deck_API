@@ -33,6 +33,10 @@ jobs:
         with:
           dotnet-version: "9.0.x"
 
+      # Add it here:
+      - name: Clean Solution
+        run: dotnet clean YuGiOh_Deck_API/YuGiOhDeckApi.sln
+
       # 3. Restore and Test using the folder paths
       - name: Restore Dependencies
         run: dotnet restore YuGiOh_Deck_API/YuGiOhDeckApi.sln
