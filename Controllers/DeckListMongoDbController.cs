@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson;
-using MongoDB.Driver;
 using System;
-using System.Security.Cryptography.X509Certificates;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using YuGiOhDeckApi.Data;
 using YuGiOhDeckApi.Models;
-using YuGiOhDeckApi.Repositories;
 
 namespace YuGiOhDeckApi.Controllers
 {
@@ -13,10 +11,6 @@ namespace YuGiOhDeckApi.Controllers
     [ApiController]
     public class DeckListMongoDbController : ControllerBase
     {
-        /* =======================================
-         * =========== MONGODB LOGIC =============
-         ========================================*/
-        private readonly IMongoCollection<DeckList>? _deckListCollection;
         private readonly MongoDbService _mongoDbService;
 
         public DeckListMongoDbController(MongoDbService mongoDbService)
@@ -24,40 +18,50 @@ namespace YuGiOhDeckApi.Controllers
             _mongoDbService = mongoDbService;
         }
 
+        // 1. Added a generic Get back so nameof(Get) works in the Post method
         [HttpGet]
-        public async Task<IEnumerable<DeckList>> Get()
+        public async Task<ActionResult<IEnumerable<DeckList>>> Get()
         {
-            return await _mongoDbService.GetAsync();
+            var decks = await _mongoDbService.GetAsync();
+            return Ok(decks);
         }
 
         [HttpGet("{id}")]
-        public async Task<DeckList> GetById(int id)
+        public async Task<ActionResult<HydratedDeckResponse>> GetById(string id)
         {
-            return await _mongoDbService.GetByIdAsync(id);
+            var hydratedDeck = await _mongoDbService.GetHydratedDeckAsync(id);
+            if (hydratedDeck == null)
+            {
+                return NotFound(new { message = "RECORD_NOT_FOUND_IN_COSMOS" });
+            }
+            return Ok(hydratedDeck);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody]DeckList deckList)
+        public async Task<IActionResult> Post([FromBody] DeckList newDeck)
         {
-            await _mongoDbService.CreateAsync(deckList);
-            return CreatedAtAction(nameof(Get), new { id = deckList.Id }, deckList);
+            Console.WriteLine($"UPLINK_RECEIVED: {newDeck.Title}");
+            await _mongoDbService.CreateAsync(newDeck);
+            // This now points to the Get() method above
+            return CreatedAtAction(nameof(Get), new { id = newDeck.Id }, newDeck);
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> Update([FromBody]DeckList deckList, int id)
+        public async Task<ActionResult> Update([FromBody] DeckList deckList, string id)
         {
             await _mongoDbService.UpdateByIdAsync(deckList, id);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteById(int id)
+        public async Task<ActionResult> DeleteById(string id)
         {
             await _mongoDbService.DeleteByIdAsync(id);
-            return NoContent();    
+            return NoContent();
         }
 
-        [HttpDelete("{title}")]
+        // 2. Renamed this to avoid the "Ambiguous" redline error
+        [HttpDelete("title/{title}")]
         public async Task<ActionResult> DeleteByTitle(string title)
         {
             await _mongoDbService.DeleteByTitleAsync(title);
@@ -65,29 +69,21 @@ namespace YuGiOhDeckApi.Controllers
         }
 
         [HttpGet("user/{userId}")]
-        public async Task<ActionResult<List<DeckList>>> GetByUserId(int userId)
+        public async Task<ActionResult<List<DeckList>>> GetByUserId(string userId)
         {
-            // Use the service! It's the one that has the database connection.
             var decks = await _mongoDbService.GetByUserIdAsync(userId);
-
-            if (decks == null)
-            {
-                return Ok(new List<DeckList>()); // Return empty list instead of null
-            }
-
-            return Ok(decks);
+            return Ok(decks ?? new List<DeckList>());
         }
 
-        [HttpDelete("{deckId}/user/{userId}")] // Change {id} to {deckId}
-        public async Task<ActionResult> DeleteById(int deckId, int userId) // Use deckId here
+        // 3. User-specific delete
+        [HttpDelete("{deckId}/user/{userId}")]
+        public async Task<ActionResult> DeleteUserDeck(string deckId, string userId)
         {
             var success = await _mongoDbService.DeleteUserDeckAsync(deckId, userId);
-
             if (!success)
             {
                 return NotFound(new { message = "DECK_NOT_FOUND_OR_OWNER_MISMATCH" });
             }
-
             return NoContent();
         }
     }

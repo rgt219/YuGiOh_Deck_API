@@ -20,7 +20,7 @@ namespace YuGiOhDeckApi.Controllers
         public DeckListController(IDeckListRepository deckListRepository)
         {
             _deckListRepository = deckListRepository;
-        }        
+        }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DeckList>>> GetAllAsync()
@@ -43,23 +43,23 @@ namespace YuGiOhDeckApi.Controllers
         public async Task<ActionResult<DeckList>> CreateDeckList(DeckList deckList)
         {
             await _deckListRepository.AddDeckListAsync(deckList);
-            return CreatedAtAction(nameof(GetDeckListById), new {id = deckList.Id}, deckList);
+            return CreatedAtAction(nameof(GetDeckListById), new { id = deckList.Id }, deckList);
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteDeckListById(int id)
         {
             await _deckListRepository.DeleteDeckListAsync(id);
-            return NoContent();            
+            return NoContent();
         }
 
         [HttpPut("{id}")]
         public async Task<ActionResult<DeckList>> UpdateDeckListAsync(int id, DeckList deckList)
         {
-            if (id != deckList.Id)
-            {
-                return BadRequest();
-            }
+            // if (id != deckList.Id)
+            // {
+            //     return BadRequest();
+            // }
 
             await _deckListRepository.UpdateDeckListAsync(deckList);
 

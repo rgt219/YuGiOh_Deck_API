@@ -36,7 +36,11 @@ namespace YuGiOhDeckApi
             //Adding service (repository) to our Dependency Injection for the lifetime of a single HTTP instance
             builder.Services.AddScoped<IDeckListRepository, DeckListRepository>();
             builder.Services.AddScoped<UserRegistrationService>();
-            builder.Services.AddControllers();
+            builder.Services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase;
+                });
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 

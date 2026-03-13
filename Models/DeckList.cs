@@ -7,38 +7,32 @@ namespace YuGiOhDeckApi.Models
 {
     public class DeckList
     {
+        // CHANGE: Change Card objects to strings (IDs)
         [BsonElement("mainDeck")]
-        public List<Card>? MainDeck { get; set; }
+        public List<string>? MainDeck { get; set; }
 
         [BsonElement("extraDeck")]
-        public List<Card>? ExtraDeck { get; set; }
+        public List<string>? ExtraDeck { get; set; }
 
         [BsonElement("sideDeck")]
-        public List<Card>? SideDeck { get; set; }
+        public List<string>? SideDeck { get; set; }
 
         public DeckList()
         {
-            MainDeck = new List<Card>();
-            ExtraDeck = new List<Card>();
-            SideDeck = new List<Card>();
+            MainDeck = new List<string>();
+            ExtraDeck = new List<string>();
+            SideDeck = new List<string>();
         }
 
         [BsonId]
-        [BsonRepresentation(BsonType.Int32)]
-        public int? Id { get; set; }
+        [BsonRepresentation(BsonType.String)] // CHANGE: Use string IDs for random flexibility
+        public string? Id { get; set; }
 
         [BsonElement("title")]
         public string Title { get; set; }
 
         [BsonElement("userId")]
-        public int UserId { get; set; }
-    }
-
-    public enum DeckSection
-    {
-        Main,
-        Extra,
-        Side
+        public string UserId { get; set; } // Matches the string format from React
     }
 }
 
