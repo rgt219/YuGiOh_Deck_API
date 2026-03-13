@@ -82,28 +82,38 @@ jobs:
       # 2. This checks the "secret" URL of the new version
       - name: Run Smoke Test
         run: |
-          # Get the unique URL for the revision we just created
+          # 1. Ask Azure for the name of the newest revision created
+          REVISION_NAME=$(az containerapp revision list \
+            --name api \
+            --resource-group ErreGeTe \
+            --query "[0].name" -o tsv)
+
+          echo "Newly created revision is: $REVISION_NAME"
+
+          # 2. Get that revision's unique URL
           REVISION_URL=$(az containerapp revision show \
             --name api \
             --resource-group ErreGeTe \
-            --revision ${{ steps.deploy_step.outputs.revisionName }} \
+            --revision $REVISION_NAME \
             --query properties.fqdn -o tsv)
 
           echo "Testing new revision at: https://$REVISION_URL"
 
-          # Ping your API (using the endpoint that previously gave you the 500 error)
+          # 3. Ping the API
           STATUS=$(curl -s -o /dev/null -w "%{http_code}" "https://$REVISION_URL/api/mongodb/DeckListMongoDb/user/447572")
 
           if [ "$STATUS" -ne 200 ]; then
-            echo "Smoke test failed with status $STATUS! Users are still safe on the old version."
+            echo "Smoke test failed with status $STATUS!"
             exit 1
           fi
 
-      # 3. Only if the test above passes, we move the users over
+          # 4. Export the revision name so the next step can use it
+          echo "FINAL_REVISION=$REVISION_NAME" >> $GITHUB_ENV
+
       - name: Shift Traffic to 100%
         if: success()
         run: |
           az containerapp ingress traffic set \
             --name api \
             --resource-group ErreGeTe \
-            --revision-weight ${{ steps.deploy_step.outputs.revisionName }}=100
+            --revision-weight ${{ env.FINAL_REVISION }}=100
